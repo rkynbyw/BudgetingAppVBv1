@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>BudgetingApp.DAL</RootNamespace>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BudgetingApp.BO\BudgetingApp.BO.vbproj" />
+    <ProjectReference Include="..\BudgetingApp.Interface\BudgetingApp.Interface.vbproj" />
+  </ItemGroup>
+
+</Project>
