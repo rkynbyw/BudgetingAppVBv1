@@ -5,7 +5,7 @@ Imports BudgetingApp.Interface
 
 
 Public Class WalletDAL
-    Implements ICrud
+    Implements IWallet
 
     Private strConn As String
     Private conn As SqlConnection
@@ -17,8 +17,8 @@ Public Class WalletDAL
         conn = New SqlConnection(strConn)
     End Sub
 
-    Public Function GetAll() As List(Of Wallet) Implements ICrud.GetAll
-        Dim wallets As New List(Of Wallet)()
+    Public Function GetAll() As List(Of Wallet) Implements ICrud(Of Wallet).GetAll
+        Dim wallets As New List(Of Wallet)
 
         Try
             conn.Open()
@@ -49,27 +49,23 @@ Public Class WalletDAL
         Return wallets
     End Function
 
-    Public Function GetByEmail() As List(Of User) Implements ICrud.GetByEmail
+    Public Function Create(obj As Wallet) As Integer Implements ICrud(Of Wallet).Create
         Throw New NotImplementedException()
     End Function
 
-    Public Function Create(obj As User) As Integer Implements ICrud(Of User).Create
+    Public Function GetById(id As Integer) As Wallet Implements ICrud(Of Wallet).GetById
         Throw New NotImplementedException()
     End Function
 
-    Public Function GetById(id As Integer) As User Implements ICrud(Of User).GetById
+    Public Function Update(obj As Wallet) As Integer Implements ICrud(Of Wallet).Update
         Throw New NotImplementedException()
     End Function
 
-    Public Function Update(obj As User) As Integer Implements ICrud(Of User).Update
+    Public Function Delete(id As Integer) As Integer Implements ICrud(Of Wallet).Delete
         Throw New NotImplementedException()
     End Function
 
-    Public Function Delete(id As Integer) As Integer Implements ICrud(Of User).Delete
-        Throw New NotImplementedException()
-    End Function
-
-    Private Function ICrud_GetAll() As List(Of User) Implements ICrud(Of User).GetAll
+    Public Function GetWalletByUserID() As List(Of Wallet) Implements IWallet.GetWalletByUserID
         Throw New NotImplementedException()
     End Function
 End Class

@@ -1,9 +1,9 @@
-﻿Imports System.Data.SqlClient
+﻿Imports System.Data
+Imports System.Data.SqlClient
 Imports BudgetingApp.BO
 Imports BudgetingApp.Interface
-
 Public Class UserDAL
-    Implements ICrud
+    Implements IUser
 
     Private strConn As String
     Private conn As SqlConnection
@@ -16,7 +16,7 @@ Public Class UserDAL
 
     End Sub
 
-    Public Function GetAll() As List(Of User) Implements ICrud.GetAll
+    Public Function GetAll() As List(Of User) Implements ICrud(Of User).GetAll
         Dim Users As New List(Of User)
         Try
             Dim strSql = "SELECT * FROM Users order by UserID"
@@ -49,8 +49,39 @@ Public Class UserDAL
     End Function
 
     Public Function Create(obj As User) As Integer Implements ICrud(Of User).Create
-        Throw New NotImplementedException()
+
+        Try
+            Dim strSP = "usp_CreateUser"
+            cmd = New SqlCommand(strSP, conn)
+            cmd.CommandType = CommandType.StoredProcedure
+
+            cmd.Parameters.AddWithValue("@email", obj.Email)
+            cmd.Parameters.AddWithValue("@username", obj.Username)
+            cmd.Parameters.AddWithValue("@fullname", obj.FullName)
+            cmd.Parameters.AddWithValue("@password", obj.HashedPassword)
+            cmd.Parameters.AddWithValue("@password", obj.Salt)
+
+            conn.Open()
+            Dim result = cmd.ExecuteNonQuery
+            If result <> 1 Then
+                Throw New ArgumentException("Customer not Created")
+            End If
+            Return result
+        Catch sqlex As SqlException
+            Throw New ArgumentException(sqlex.Message & " " & sqlex.Number)
+        Catch ex As Exception
+            Throw ex
+        Finally
+            cmd.Dispose()
+            conn.Close()
+        End Try
+
+
     End Function
+
+
+
+
 
     Public Function GetById(id As Integer) As User Implements ICrud(Of User).GetById
         Throw New NotImplementedException()
@@ -64,7 +95,7 @@ Public Class UserDAL
         Throw New NotImplementedException()
     End Function
 
-    Public Function GetByEmail() As List(Of User) Implements ICrud.GetByEmail
+    Public Function GetByEmail() As List(Of User) Implements IUser.GetByEmail
         Throw New NotImplementedException()
     End Function
 End Class

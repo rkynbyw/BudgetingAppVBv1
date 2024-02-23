@@ -1,10 +1,9 @@
 ﻿Imports BudgetingApp.BO
 
-Public Interface ICrud
+Public Interface IUser
     Inherits ICrud(Of User)
 
     Function GetByEmail() As List(Of User)
-    Function GetAll() As List(Of Wallet)
 End Interface
 
 'Dim customerDALas As New DAL.UserDAL()
