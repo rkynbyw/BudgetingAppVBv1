@@ -1,11 +1,12 @@
-﻿Imports BudgetingApp.BO
+﻿
+Imports BudgetingApp.BO
 
 Public Interface IUser
     Inherits ICrud(Of User)
 
     Function GetByEmail() As List(Of User)
+    Function UpdateUserPassword(ByVal UserID As Integer, OldPassword As String, NewPassword As String) As Integer
 End Interface
-
 'Dim customerDALas As New DAL.UserDAL()
 'Dim customers As List(Of User) = customerDALas.GetAll()
 

@@ -13,7 +13,6 @@ Public Class UserDAL
     Public Sub New()
         strConn = "Server=.\BSISqlExpress; Database=BudgetingApp; Trusted_Connection=True"
         conn = New SqlConnection(strConn)
-
     End Sub
 
     Public Function GetAll() As List(Of User) Implements ICrud(Of User).GetAll
@@ -32,7 +31,6 @@ Public Class UserDAL
                     user1.Email = dr("Email").ToString()
                     user1.Username = dr("Username").ToString()
                     user1.FullName = dr("FullName").ToString()
-                    user1.HashedPassword = dr("HashedPassword").ToString()
                     Users.Add(user1)
                 End While
             End If
@@ -58,8 +56,7 @@ Public Class UserDAL
             cmd.Parameters.AddWithValue("@email", obj.Email)
             cmd.Parameters.AddWithValue("@username", obj.Username)
             cmd.Parameters.AddWithValue("@fullname", obj.FullName)
-            cmd.Parameters.AddWithValue("@password", obj.HashedPassword)
-            cmd.Parameters.AddWithValue("@password", obj.Salt)
+            cmd.Parameters.AddWithValue("@password", obj.Password)
 
             conn.Open()
             Dim result = cmd.ExecuteNonQuery
@@ -79,20 +76,80 @@ Public Class UserDAL
 
     End Function
 
-
-
-
-
     Public Function GetById(id As Integer) As User Implements ICrud(Of User).GetById
         Throw New NotImplementedException()
     End Function
 
-    Public Function Update(obj As User) As Integer Implements ICrud(Of User).Update
-        Throw New NotImplementedException()
+    Public Function Update(ByVal user As User) As Integer Implements ICrud(Of User).Update
+        Dim result As Integer
+
+        Try
+            conn.Open()
+
+            Dim strSP = "usp_UpdateUserData"
+            cmd = New SqlCommand(strSP, conn)
+            cmd.CommandType = CommandType.StoredProcedure
+
+
+            cmd.Parameters.AddWithValue("@userid", user.UserID)
+            cmd.Parameters.AddWithValue("@email", user.Email)
+            cmd.Parameters.AddWithValue("@username", user.Username)
+            cmd.Parameters.AddWithValue("@fullname", user.FullName)
+
+            result = cmd.ExecuteNonQuery()
+        Catch sqlex As SqlException
+            Throw New Exception(sqlex.Message) ' Consider handling specific errors differently
+        Finally
+            cmd.Dispose()
+            conn.Close()
+        End Try
+
+        Return result
     End Function
 
-    Public Function Delete(id As Integer) As Integer Implements ICrud(Of User).Delete
-        Throw New NotImplementedException()
+    Public Function UpdateUserPassword(ByVal userID As Integer, ByVal oldPassword As String, ByVal newPassword As String) As Integer Implements IUser.UpdateUserPassword
+        Dim result As Integer
+        Try
+            Dim strSP = "usp_CreateUser"
+            cmd = New SqlCommand(strSP, conn)
+            cmd.CommandType = CommandType.StoredProcedure
+
+            cmd.Parameters.AddWithValue("@UserID", userID)
+            cmd.Parameters.AddWithValue("@OldPassword", oldPassword)
+            cmd.Parameters.AddWithValue("@NewPassword", newPassword)
+
+            conn.Open()
+            result = cmd.ExecuteNonQuery()
+        Catch sqlex As SqlException
+            Throw New Exception(sqlex.Message) ' Consider handling specific errors differently
+        Finally
+            cmd.Dispose()
+            conn.Close()
+        End Try
+
+        Return result
+    End Function
+
+    Public Function Delete(ByVal userId As Integer) As Integer Implements ICrud(Of User).Delete
+        Try
+
+            Dim strSP = "usp_DeleteUser"
+            cmd = New SqlCommand(strSP, conn)
+            cmd.CommandType = CommandType.StoredProcedure
+
+            cmd.Parameters.AddWithValue("@UserID", userId)
+
+            conn.Open()
+            Dim result = cmd.ExecuteNonQuery()
+            Return result
+        Catch sqlex As SqlException
+            Throw New ArgumentException(sqlex.Message & " " & sqlex.Number)
+        Catch ex As Exception
+            Throw ex
+        Finally
+            cmd.Dispose()
+            conn.Close()
+        End Try
     End Function
 
     Public Function GetByEmail() As List(Of User) Implements IUser.GetByEmail

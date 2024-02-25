@@ -3,13 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BudgetingApp.BO", "BudgetingApp.BO\BudgetingApp.BO.vbproj", "{F0913831-FF33-4097-8C05-BB88F3A3AA69}"
+Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "BudgetingApp.BO", "BudgetingApp.BO\BudgetingApp.BO.vbproj", "{F0913831-FF33-4097-8C05-BB88F3A3AA69}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BudgetingApp.Interface", "BudgetingApp.Interface\BudgetingApp.Interface.vbproj", "{4F574976-329A-48B6-93C7-EAB45DECB02D}"
+Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "BudgetingApp.Interface", "BudgetingApp.Interface\BudgetingApp.Interface.vbproj", "{4F574976-329A-48B6-93C7-EAB45DECB02D}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BudgetingApp.DAL", "BudgetingApp.DAL\BudgetingApp.DAL.vbproj", "{E5018A27-B70B-4430-A2BE-C8A7AACCD039}"
+Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "BudgetingApp.DAL", "BudgetingApp.DAL\BudgetingApp.DAL.vbproj", "{E5018A27-B70B-4430-A2BE-C8A7AACCD039}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BudgetingApp.View", "BudgetingApp.View\BudgetingApp.View.vbproj", "{CEF4F572-A699-411D-8152-EF0DEFDE0D99}"
+Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "BudgetingApp.View", "BudgetingApp.View\BudgetingApp.View.vbproj", "{CEF4F572-A699-411D-8152-EF0DEFDE0D99}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "SampleWebApp", "SampleWebApp\SampleWebApp.vbproj", "{2202FEB5-C39D-4B8B-B24D-395E1FD07171}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "MyWebFormApp", "MyWebFormApp\MyWebFormApp.vbproj", "{CD8E53D2-B177-494B-AE08-1CEEF98E43D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{CEF4F572-A699-411D-8152-EF0DEFDE0D99}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CEF4F572-A699-411D-8152-EF0DEFDE0D99}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CEF4F572-A699-411D-8152-EF0DEFDE0D99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2202FEB5-C39D-4B8B-B24D-395E1FD07171}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2202FEB5-C39D-4B8B-B24D-395E1FD07171}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2202FEB5-C39D-4B8B-B24D-395E1FD07171}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2202FEB5-C39D-4B8B-B24D-395E1FD07171}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD8E53D2-B177-494B-AE08-1CEEF98E43D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD8E53D2-B177-494B-AE08-1CEEF98E43D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD8E53D2-B177-494B-AE08-1CEEF98E43D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD8E53D2-B177-494B-AE08-1CEEF98E43D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
